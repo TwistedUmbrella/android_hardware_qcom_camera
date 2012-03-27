@@ -1,7 +1,7 @@
 ifeq ($(TARGET_BOARD_PLATFORM),msm8660)
 
 ifneq ($(USE_CAMERA_STUB),true)
-ifeq ($(strip $(BOARD_USES_QCOM_HARDWARE)), true)
+ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 BUILD_LIBCAMERA:=true
 ifeq ($(BUILD_LIBCAMERA),true)
 
