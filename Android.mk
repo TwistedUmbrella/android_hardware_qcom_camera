@@ -1,4 +1,4 @@
-ifeq ($(TARGET_BOARD_PLATFORM),msm8660)
+ifeq ($(BOARD_USES_CAF_CAMERA),true)
 
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 BUILD_LIBCAMERA:=true
