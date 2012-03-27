@@ -292,10 +292,10 @@ static liveshotState liveshot_state = LIVESHOT_DONE;
 static const target_map targetList [] = {
     { "msm7625", TARGET_MSM7625 },
     { "msm7625a", TARGET_MSM7625A },
-    { "msm7627", TARGET_MSM7627 },
-    { "msm7627a", TARGET_MSM7627A },
-    { "qsd8250", TARGET_QSD8250 },
-    { "msm7630", TARGET_MSM7630 },
+    { "msm7x27", TARGET_MSM7627 },
+    { "msm7x27a", TARGET_MSM7627A },
+    { "qsd8k", TARGET_QSD8250 },
+    { "msm7x30", TARGET_MSM7630 },
     { "msm8660", TARGET_MSM8660 }
 
 };
@@ -1222,7 +1222,7 @@ void QualcommCameraHardware::FrameQueue::flush(){
 
 void QualcommCameraHardware::storeTargetType(void) {
     char mDeviceName[PROPERTY_VALUE_MAX];
-    property_get("ro.product.device",mDeviceName," ");
+    property_get("ro.board.platform",mDeviceName," ");
     mCurrentTarget = TARGET_MAX;
     for( int i = 0; i < TARGET_MAX ; i++) {
        if( !strncmp(mDeviceName, targetList[i].targetStr, 7)) {
@@ -2595,7 +2595,7 @@ bool QualcommCameraHardware::initImageEncodeParameters(int size)
 
     int rotation = mParameters.getInt("rotation");
     char mDeviceName[PROPERTY_VALUE_MAX];
-    property_get("ro.hw_plat", mDeviceName, "");
+    property_get("ro.board.platform", mDeviceName, "");
     if(!strcmp(mDeviceName,"7x25A"))
         rotation = (rotation + 90)%360;
 
@@ -4551,7 +4551,7 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
 
     int rotation = mParameters.getInt("rotation");
     char mDeviceName[PROPERTY_VALUE_MAX];
-    property_get("ro.hw_plat", mDeviceName, "");
+    property_get("ro.board.platform", mDeviceName, "");
     if(!strcmp(mDeviceName,"7x25A"))
         rotation = (rotation + 90)%360;
 
