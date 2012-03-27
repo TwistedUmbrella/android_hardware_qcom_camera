@@ -1,3 +1,5 @@
+ifeq ($(TARGET_BOARD_PLATFORM),msm8660)
+
 ifneq ($(USE_CAMERA_STUB),true)
 ifeq ($(strip $(BOARD_USES_QCOM_HARDWARE)), true)
 BUILD_LIBCAMERA:=true
@@ -109,3 +111,5 @@ endif # BUILD_TINY_ANDROID
 endif # BUILD_LIBCAMERA
 endif # BOARD_USES_QCOM_HARDWARE
 endif # USE_CAMERA_STUB
+
+endif
