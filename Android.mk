@@ -1,6 +1,5 @@
 ifeq ($(TARGET_BOARD_PLATFORM),msm8660)
 
-ifneq ($(USE_CAMERA_STUB),true)
 ifeq ($(BOARD_USES_QCOM_HARDWARE),true)
 BUILD_LIBCAMERA:=true
 ifeq ($(BUILD_LIBCAMERA),true)
@@ -8,15 +7,13 @@ ifeq ($(BUILD_LIBCAMERA),true)
 # When zero we link against libmmcamera; when 1, we dlopen libmmcamera.
 DLOPEN_LIBMMCAMERA:=1
 
-ifneq ($(BUILD_TINY_ANDROID),true)
-
 LOCAL_PATH:= $(call my-dir)
 
 include $(CLEAR_VARS)
 
 LOCAL_CFLAGS:= -DDLOPEN_LIBMMCAMERA=$(DLOPEN_LIBMMCAMERA)
 
-ifeq ($(strip $(TARGET_USES_ION)),true)
+ifeq ($(TARGET_USES_ION),true)
 LOCAL_CFLAGS += -DUSE_ION
 endif
 ifeq ($(TARGET_BOARD_PLATFORM),msm8960)
@@ -49,9 +46,6 @@ LOCAL_C_INCLUDES += \
         frameworks/base/services/camera/libcameraservice #
 
 LOCAL_SRC_FILES := $(MM_CAM_FILES) $(LOCAL_HAL_FILES)
-
-
-
 
 ifeq ($(TARGET_BOARD_PLATFORM),msm7x27)
 LOCAL_CFLAGS+= -DNUM_PREVIEW_BUFFERS=6 -D_ANDROID_
@@ -99,8 +93,6 @@ LOCAL_MODULE:= camera.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_SHARED_LIBRARY)
 
-endif # BUILD_TINY_ANDROID
-endif # BUILD_LIBCAMERA
 endif # BOARD_USES_QCOM_HARDWARE
 endif # USE_CAMERA_STUB
 
